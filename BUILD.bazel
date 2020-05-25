@@ -1,0 +1,17 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary")
+load("@rules_cc//cc:defs.bzl", "cc_binary")
+
+cc_binary(
+    name = "main",
+    srcs = ["main.cc"],
+    deps = [
+        ":lib_go.cc",
+    ],
+)
+
+go_binary(
+    name = "lib_go",
+    srcs = ["lib.go", "lib.cc"],
+    cgo = True,
+    linkmode = "c-archive",
+)
